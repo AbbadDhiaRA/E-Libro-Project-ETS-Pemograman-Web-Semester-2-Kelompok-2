@@ -12,9 +12,7 @@ Website ini dirancang untuk menghadirkan pengalaman toko buku digital modern den
 
 ### Ketersediaan Konten Saat Ini:
 
-Saat ini, hanya buku **Atomic Habits** yang tersedia untuk dibaca secara penuh karena repository baru menyediakan file PDF untuk buku tersebut.
-
-Buku-buku lainnya yang ditampilkan dalam website masih berfungsi sebagai konten placeholder/demo antarmuka dan belum memiliki file bacaan yang terintegrasi.
+Saat ini, buku-buku yang ditampilkan dalam website masih berfungsi sebagai konten placeholder/demo antarmuka dan belum memiliki file bacaan yang terintegrasi, karena file pdf buku yang terlalu besar untuk diupload ke repository.
 
 ### Tujuan Proyek:
 
