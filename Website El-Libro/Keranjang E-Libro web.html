@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Libro - Keranjang</title>
+  <style>
+    :root {
+      --cream: #f5ede6;
+      --brown: #7b3f2a;
+      --brown-dark: #5f3112;
+      --white: #ffffff;
+      --text: #2b2b2b;
+      --border: #e6d7ca;
+      --soft: #faf6f2;
+      --red: #c0392b;
+      --shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+    }
+
+    .header {
+      background: var(--cream);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: bold;
+      color: var(--brown);
+    }
+
+    .search-bar {
+      width: 45%;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      outline: none;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 0 30px;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: var(--brown-dark);
+      margin-bottom: 35px;
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    .cart-section,
+    .summary {
+      background: var(--white);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-header label {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .remove-all {
+      color: var(--brown);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .store-name {
+      background: var(--soft);
+      padding: 15px 18px;
+      border-radius: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--brown-dark);
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 20px;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item img {
+      width: 100px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .item-info h3 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: var(--brown-dark);
+    }
+
+    .badge {
+      display: inline-block;
+      background: #fff4f2;
+      color: var(--red);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 30px;
+      font-weight: bold;
+      color: var(--brown);
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 18px;
+      margin-left: 10px;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .qty-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: white;
+      cursor: pointer;
+      font-size: 24px;
+      color: var(--brown);
+    }
+
+    .qty-value {
+      font-size: 22px;
+      font-weight: bold;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .summary h2 {
+      font-size: 34px;
+      margin-bottom: 25px;
+      color: var(--brown-dark);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      font-size: 20px;
+    }
+
+    .discount {
+      color: var(--red);
+    }
+
+    .subtotal {
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+      padding-top: 20px;
+      font-size: 32px;
+      font-weight: bold;
+      color: var(--brown-dark);
+    }
+
+    .checkout-btn {
+      width: 100%;
+      margin-top: 25px;
+      padding: 18px;
+      border: none;
+      border-radius: 14px;
+      background: var(--brown);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1000px) {
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .search-bar {
+        width: 60%;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="shared-layout.css">
+    <link rel="stylesheet" href="responsive.css" />
+  </head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img id="logo" src="logo-removebg-preview.png" style="width: 30%;" alt="logo">
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Cari buku, penulis, atau kategori...">
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Keranjang</h1>
+
+    <div class="cart-layout">
+      <div class="cart-section">
+        <div class="cart-header">
+          <label><input type="checkbox" checked> Pilih Semua</label>
+          <span class="remove-all">Hapus</span>
+        </div>
+
+        <div class="store-name">E-Libro Official Store</div>
+
+        <div id="cartItemsContainer"></div>
+      </div>
+
+      <div class="summary">
+        <h2>Ringkasan Belanja</h2>
+
+        <div class="summary-row">
+          <span>Total Harga</span>
+          <span id="totalHarga">Rp108.000</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Diskon Belanja</span>
+          <span class="discount" id="diskon">-Rp21.600</span>
+        </div>
+
+        <div class="summary-row subtotal">
+          <span>Subtotal</span>
+          <span id="subtotal">Rp86.400</span>
+        </div>
+
+        <button class="checkout-btn" onclick="tambahcheckout()">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function normalizeBook(item) {
+      const title = item.title || item.judul || 'Buku E-Libro';
+      const author = item.author || item.penulis || 'Penulis E-Libro';
+      const price = Number(item.price ?? item.harga ?? item.discountPrice ?? item.hargaDiskon ?? 0) || 0;
+      const discountPrice = Number(item.discountPrice ?? item.hargaDiskon ?? item.price ?? item.harga ?? 0) || 0;
+      const image = item.image || item.gambar || item.cover || 'https://placehold.co/180x240/5D3023/F2E9DC?text=Book';
+      return { id: item.id || title, title, author, price, discountPrice, image, format: item.format || item.tipe || 'E-Book', quantity: Number(item.quantity) || 1, detailUrl: item.detailUrl || '#' };
+    }
+
+    let cartItems = (JSON.parse(localStorage.getItem('cartItems')) || []).map(normalizeBook);
+
+    function formatRupiah(angka) {
+      return 'Rp' + (Number(angka) || 0).toLocaleString('id-ID');
+    }
+
+    function saveCart() {
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+
+    function updateSummary() {
+      const totalHarga = cartItems.reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.quantity) || 1)), 0);
+      const subtotal = cartItems.reduce((sum, item) => sum + ((Number(item.discountPrice) || 0) * (Number(item.quantity) || 1)), 0);
+      document.getElementById('totalHarga').textContent = formatRupiah(totalHarga);
+      document.getElementById('subtotal').textContent = formatRupiah(subtotal);
+      document.getElementById('diskon').textContent = '-' + formatRupiah(totalHarga - subtotal);
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItemsContainer');
+      if (!cartItems.length) {
+        container.innerHTML = '<div class="elibro-empty-state">Keranjang masih kosong. Yuk pilih buku dari Explore Books.</div>';
+        updateSummary();
+        return;
+      }
+
+      container.innerHTML = cartItems.map((item, index) => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.title}">
+          <div class="item-info">
+            <span class="badge">${item.format}</span>
+            <h3>${item.title}</h3>
+            <p>${item.author}</p>
+            <div class="price">${formatRupiah(item.discountPrice)} <span class="old-price">${formatRupiah(item.price)}</span></div>
+          </div>
+          <div class="quantity">
+            <button class="qty-btn" onclick="ubahQty(${index}, -1)">-</button>
+            <span class="qty-value">${Number(item.quantity) || 1}</span>
+            <button class="qty-btn" onclick="ubahQty(${index}, 1)">+</button>
+          </div>
+        </div>
+      `).join('');
+      updateSummary();
+    }
+
+    function ubahQty(index, nilai) {
+      if (!cartItems[index]) return;
+      cartItems[index].quantity = Math.max(1, (Number(cartItems[index].quantity) || 1) + nilai);
+      saveCart();
+      renderCart();
+    }
+
+    function tambahcheckout() {
+      if (!cartItems.length) {
+        alert('Keranjang masih kosong.');
+        return;
+      }
+      localStorage.setItem('checkoutItems', JSON.stringify(cartItems));
+      window.location.href = 'Checkout E-Librro web.html';
+    }
+
+    document.querySelector('.remove-all')?.addEventListener('click', () => {
+      cartItems = [];
+      saveCart();
+      renderCart();
+    });
+
+    renderCart();
+  </script>
+  <script src="shared-layout.js" defer></script>
+  <script src="responsive-nav.js"></script>
+</body>
+</html>
+
+
+
+

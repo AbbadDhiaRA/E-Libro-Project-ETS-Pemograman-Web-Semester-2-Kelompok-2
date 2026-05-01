@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us â€” E-Libro Team</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="stylesheet" href="about.css"/>
+    <link rel="stylesheet" href="../responsive.css" />
+  </head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<header class="navbar" id="navbar">
+        <div class="nav-container">
+
+            <!-- Logo -->
+            <a href="../Homepage/Homepage.html" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="38" height="38">
+                        <!-- Open book left page -->
+                        <path d="M24 38 C24 38 10 33 7 15 L7 10 C7 10 17 13 24 22" stroke="#5D3023" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                        <!-- Open book right page lines -->
+                        <line x1="24" y1="22" x2="35" y2="14" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <line x1="24" y1="25" x2="36" y2="17" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <line x1="24" y1="28" x2="37" y2="21" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <line x1="24" y1="31" x2="37" y2="25" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <line x1="24" y1="34" x2="36" y2="29" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <!-- Pixel dots -->
+                        <rect x="38" y="10" width="3" height="3" rx="0.5" fill="#895737" opacity="0.8" />
+                        <rect x="42" y="13" width="2.5" height="2.5" rx="0.5" fill="#C08552" opacity="0.6" />
+                        <rect x="40" y="17" width="2" height="2" rx="0.5" fill="#D9B49D" opacity="0.7" />
+                        <rect x="39" y="7" width="2" height="2" rx="0.5" fill="#5D3023" opacity="0.5" />
+                        <rect x="43" y="8" width="1.5" height="1.5" rx="0.5" fill="#C08552" opacity="0.4" />
+                        <rect x="44" y="18" width="1.5" height="1.5" rx="0.5" fill="#D9B49D" opacity="0.5" />
+                        <!-- Book base -->
+                        <path
+                            d="M7 10 C7 10 15.5 12 24 22 C32.5 12 41 10 41 10 L41 15 C41 33 27 38 24 38 C21 38 7 33 7 15 Z"
+                            stroke="#5D3023" stroke-width="0" fill="none" />
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name">E-Libro</span>
+                    <span class="logo-sub">E-book store</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="nav-links" id="navLinks">
+                <a href="../Explore.html" class="nav-link">
+                    <i data-lucide="search" class="nav-icon"></i> Explore Books
+                </a>
+                <a href="../About Us/about.html" class="nav-link">
+                    <i data-lucide="id-card-lanyard" class="nav-icon"></i> About Us
+                </a>
+                <a href="../mylibrary.html" class="nav-link">
+                    <i data-lucide="library" class="nav-icon"></i> My Library
+                </a>
+            
+                <a href="../Keranjang E-Libro web.html" class="nav-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57L22 7H5.12"></path></svg> Keranjang</a>
+            </nav>
+
+            <!-- Account Area -->
+            <div class="nav-account">
+                <!-- Auth state â€” toggled by JS -->
+                <div id="authGuest" class="auth-guest">
+                    <a href="../Login Page/Login Page.html" class="btn-login">Sign In</a>
+                </div>
+                <div id="authUser" class="auth-user" style="display:none;">
+                    <div class="user-avatar" id="userAvatar">
+                        <span id="userInitial">U</span>
+                    </div>
+                    <span id="userNameDisplay" class="user-name">User</span>
+                </div>
+            </div>
+
+            <!-- Hamburger -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+
+        </div>
+    </header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mobile-nav">
+    <a href="../Homepage/Homepage.html" class="mobile-link" onclick="closeMobile()">Home</a>
+    <a href="../Explore.html" class="mobile-link" onclick="closeMobile()">Explore Books</a>
+    <a href="../About Us/about.html" class="mobile-link active-mobile" onclick="closeMobile()">About Us</a>
+  
+            <a href="../Keranjang E-Libro web.html" class="mobile-link" onclick="closeMobile()">Keranjang</a>
+        </nav>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-pattern"></div>
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+
+      <div class="hero-copy">
+        <div class="hero-eyebrow" data-animate>
+          <i data-lucide="users"></i>
+          <span>Tim Pengembang E-Libro</span>
+        </div>
+        <h1 class="hero-title" data-animate data-delay="0.1">
+          Meet The Minds<br/><em>Behind E-Libro</em>
+        </h1>
+        <p class="hero-sub" data-animate data-delay="0.2">
+          Empat mahasiswa dengan satu visi â€” membangun platform literasi digital yang elegan, aksesibel, dan benar-benar bermanfaat bagi komunitas pembaca Indonesia.
+        </p>
+        <div class="hero-actions" data-animate data-delay="0.3">
+          <a href="#team" class="btn-primary">
+            <i data-lucide="users"></i> Kenali Tim Kami
+          </a>
+          <a href="#vision" class="btn-ghost">
+            <i data-lucide="eye"></i> Visi Proyek
+          </a>
+        </div>
+      </div>
+
+      <!-- Orbital avatar ring -->
+      <div class="hero-orbital" data-animate data-delay="0.15" data-anim-dir="left">
+        <div class="orbit-track orbit-outer">
+          <div class="orbit-dot orbit-dot-1"><span>PM</span></div>
+          <div class="orbit-dot orbit-dot-2"><span>FE</span></div>
+          <div class="orbit-dot orbit-dot-3"><span>UI</span></div>
+          <div class="orbit-dot orbit-dot-4"><span>JS</span></div>
+        </div>
+        <div class="orbit-center">
+          <svg viewBox="0 0 64 64" fill="none" width="52" height="52">
+            <path d="M32 52C32 52 10 45 7 22L7 15C7 15 20 19 32 31" stroke="#F2E9DC" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="32" y1="31" x2="46" y2="21" stroke="#C08552" stroke-width="2" stroke-linecap="round"/>
+            <line x1="32" y1="35" x2="47" y2="26" stroke="#C08552" stroke-width="2" stroke-linecap="round"/>
+            <line x1="32" y1="39" x2="48" y2="32" stroke="#C08552" stroke-width="2" stroke-linecap="round"/>
+            <line x1="32" y1="43" x2="47" y2="38" stroke="#C08552" stroke-width="2" stroke-linecap="round"/>
+            <rect x="50" y="14" width="4" height="4" rx="0.6" fill="#C08552" opacity="0.7"/>
+            <rect x="55" y="21" width="3" height="3" rx="0.6" fill="#D9B49D" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECT OVERVIEW ===================== -->
+<section class="section" id="overview">
+  <div class="container">
+    <div class="overview-grid">
+
+      <div class="overview-text" data-animate>
+        <p class="section-label">Tentang Proyek</p>
+        <h2 class="section-title">Tugas Kuliah yang <em>Menjadi Nyata</em></h2>
+        <p class="body-text">E-Libro lahir dari tugas kuliah yang kemudian tumbuh menjadi platform yang benar-benar kami percaya bisa membuat perubahan. Kami tidak hanya membangun sebuah website â€” kami membangun ekosistem literasi digital.</p>
+        <div class="info-chips">
+          <div class="chip"><i data-lucide="graduation-cap"></i><span id="uniName">Institut Teknologi Sepuluh Nopember (ITS)</span></div>
+          <div class="chip"><i data-lucide="book"></i><span id="courseName">Pemograman Web</span></div>
+          <div class="chip"><i data-lucide="calendar"></i><span>Semester 2 / 2026</span></div>
+          <div class="chip"><i data-lucide="users"></i><span>4 Anggota Kelompok</span></div>
+        </div>
+      </div>
+
+      <div class="overview-stats" data-animate data-anim-dir="left">
+        <div class="big-stat-card">
+          <div class="bsc-row">
+            <div class="bsc-item">
+              <span class="bsc-num">4</span>
+              <span class="bsc-label">Anggota Tim</span>
+            </div>
+            <div class="bsc-divider"></div>
+            <div class="bsc-item">
+              <span class="bsc-num">7+</span>
+              <span class="bsc-label">Halaman</span>
+            </div>
+          </div>
+          <div class="bsc-row">
+            <div class="bsc-item">
+              <span class="bsc-num">3</span>
+              <span class="bsc-label">Bulan Dev</span>
+            </div>
+            <div class="bsc-divider"></div>
+            <div class="bsc-item">
+              <span class="bsc-num">âˆž</span>
+              <span class="bsc-label">Semangat</span>
+            </div>
+          </div>
+          <div class="bsc-quote">"Dari tugas, menjadi karya."</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mission pillars -->
+    <div class="pillars" data-animate>
+      <div class="pillar">
+        <div class="pillar-icon"><i data-lucide="target"></i></div>
+        <h3>Misi</h3>
+        <p>Menyediakan platform literasi digital yang premium dan mudah diakses oleh seluruh lapisan masyarakat Indonesia.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><i data-lucide="telescope"></i></div>
+        <h3>Visi</h3>
+        <p>Menjadi platform e-book terpercaya di Indonesia yang mendorong budaya membaca dan ekosistem penerbitan indie.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><i data-lucide="heart"></i></div>
+        <h3>Nilai</h3>
+        <p>Inklusivitas, kreativitas, dan rasa hormat terhadap karya intelektual menjadi fondasi setiap keputusan kami.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TEAM MEMBERS ===================== -->
+<section class="section section-alt" id="team">
+  <div class="container">
+    <div class="section-header-c" data-animate>
+      <p class="section-label">Tim Pengembang</p>
+      <h2 class="section-title">The People Who <em>Built This</em></h2>
+      <p class="section-sub">Empat individu, empat peran unik, satu tujuan bersama.</p>
+    </div>
+    <div class="team-grid" id="teamGrid"><!-- JS rendered --></div>
+  </div>
+</section>
+
+<!-- ===================== CONTRIBUTION ===================== -->
+<section class="section" id="contributions">
+  <div class="container">
+    <div class="section-header-c" data-animate>
+      <p class="section-label">Pembagian Tugas</p>
+      <h2 class="section-title">Siapa Mengerjakan <em>Apa?</em></h2>
+    </div>
+    <div class="contrib-layout" id="contribLayout"><!-- JS rendered --></div>
+  </div>
+</section>
+
+<!-- ===================== VISION ===================== -->
+<section class="section section-alt" id="vision">
+  <div class="container">
+    <div class="vision-card" data-animate>
+      <div class="vision-left">
+        <p class="section-label" style="color:var(--terracotta)">Mengapa E-Libro?</p>
+        <h2 class="section-title">Lebih dari Sekadar<br/><em>Tugas Kuliah</em></h2>
+        <p class="body-text">Indonesia adalah negara dengan jutaan pembaca potensial namun infrastruktur literasi digital yang masih jauh dari optimal. Kami melihat celah ini dan memutuskan untuk mengisinya.</p>
+        <p class="body-text">E-Libro adalah bukti bahwa mahasiswa Indonesia mampu membangun produk digital berkelas dunia.</p>
+
+        <div class="timeline">
+          <div class="tl-item done">
+            <div class="tl-node"><i data-lucide="check" style="width:12px;height:12px;"></i></div>
+            <div class="tl-body">
+              <h4>Fase 1 â€” MVP</h4>
+              <p>Homepage, login, eksplorasi buku, komunitas, dan halaman legal.</p>
+            </div>
+          </div>
+          <div class="tl-item done">
+            <div class="tl-node"><i data-lucide="check" style="width:12px;height:12px;"></i></div>
+            <div class="tl-body">
+              <h4>Fase 2 â€” Platform</h4>
+              <p>Library personal, upload buku, dan halaman About Us.</p>
+            </div>
+          </div>
+          <div class="tl-item future">
+            <div class="tl-node"><i data-lucide="clock" style="width:12px;height:12px;"></i></div>
+            <div class="tl-body">
+              <h4>Fase 3 â€” Ekosistem</h4>
+              <p>AI recommendations, audiobook, dan marketplace penulis indie.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vision-right">
+        <div class="quote-block">
+          <div class="qb-mark">"</div>
+          <blockquote>Kami percaya bahwa platform yang baik bukan hanya tentang teknologi â€” melainkan tentang bagaimana teknologi itu digunakan untuk memperluas akses manusia terhadap pengetahuan.</blockquote>
+          <cite>â€” Tim Pengembang E-Libro</cite>
+        </div>
+
+        <div class="tech-stack">
+          <p class="ts-label"><i data-lucide="code-2"></i> Teknologi yang Digunakan</p>
+          <div class="ts-tags">
+            <span>HTML5</span><span>CSS3</span><span>JavaScript ES6+</span>
+            <span>Google Fonts</span><span>Lucide Icons</span>
+            <span>localStorage API</span><span>CSS Grid</span><span>Flexbox</span>
+            <span>Intersection Observer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-ornament">
+      <span class="orn-line"></span>
+      <svg viewBox="0 0 32 32" fill="none" width="20" height="20">
+        <path d="M16 26C16 26 5 22 3 10L3 7C3 7 10 9 16 16" stroke="#C08552" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="16" y1="16" x2="23" y2="10" stroke="#895737" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="16" y1="18" x2="24" y2="13" stroke="#895737" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="16" y1="20" x2="24" y2="16" stroke="#895737" stroke-width="1.4" stroke-linecap="round"/>
+        <rect x="25" y="7" width="2.5" height="2.5" rx="0.4" fill="#C08552" opacity="0.7"/>
+      </svg>
+      <span class="orn-line"></span>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-brand-col">
+        <span class="f-logo-name">E-Libro</span>
+        <span class="f-logo-sub">E-book store</span>
+        <p class="f-tagline">Dibuat dengan â™¥ oleh Tim E-Libro</p>
+      
+      </div>
+
+      <div class="footer-credits-col">
+        <h4>Tim Pengembang</h4>
+        <div id="footerCredits"><!-- JS rendered --></div>
+      </div>
+
+      <div class="footer-nav-col">
+        <h4>Halaman</h4>
+        <a href="../Homepage/Homepage.html">Beranda</a>
+        <a href="../Explore.html">Explore Books</a>
+        <a href="../Privasi, Ketentuan, About Us/Privasi.html">Privasi</a>
+        <a href="../Privasi, Ketentuan, About Us/Ketentuan.html">Ketentuan</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Â© 2025 E-Libro â€” Proyek Tugas Kuliah. Dibuat untuk tujuan akademis.</p>
+      <p style="opacity:0.4;font-size:0.72rem;">Seluruh data bersifat fiktif untuk keperluan demonstrasi.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== PROFILE MODAL ===================== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-box" id="modalBox" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()"><i data-lucide="x"></i></button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script src="about.js"></script>
+  <script src="../responsive-nav.js"></script>
+</body>
+</html>
+
+
+

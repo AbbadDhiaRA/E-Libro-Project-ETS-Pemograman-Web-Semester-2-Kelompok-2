@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Library - E-Libro</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f3e9df;
+    }
+
+    /* HEADER */
+    .header {
+      padding: 30px 50px 10px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+    }
+
+    .header p {
+      color: #777;
+    }
+
+    /* SEARCH */
+    .search-box {
+      padding: 0 50px 20px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    /* LIBRARY GRID */
+    .library {
+      padding: 30px 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 25px;
+    }
+
+    /* CARD */
+    .book-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .book-card:hover {
+      transform: translateY(-6px);
+    }
+
+    /* FAVORITE (checkbox trick) */
+    .fav-container input {
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    .fav-container input:checked+.heart {
+      color: red;
+    }
+
+    /* IMAGE */
+    .book-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .book-card h3 {
+      font-size: 14px;
+    }
+
+    .book-card p {
+      font-size: 12px;
+      color: #777;
+    }
+
+    /* PROGRESS */
+    .progress {
+      background: #eee;
+      height: 6px;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #6b3e26;
+      border-radius: 10px;
+    }
+
+    .progress-text {
+      font-size: 12px;
+      color: #555;
+    }
+
+
+    /* BUTTON */
+    .read-btn {
+      margin-top: 10px;
+      padding: 8px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      background: #b77b4b;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .read-btn:hover {
+      background: #6b3e26;
+    }
+
+    .delete-btn {
+      margin-top: 8px;
+      padding: 8px;
+      width: 100%;
+      border: 1px solid #c94b3b;
+      border-radius: 8px;
+      background: white;
+      color: #c94b3b;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .delete-btn:hover {
+      background: #c94b3b;
+      color: white;
+    }
+  </style>
+
+  <link rel="stylesheet" href="shared-layout.css">
+    <link rel="stylesheet" href="responsive.css" />
+  </head>
+
+<body>
+
+  <div class="header">
+    <h1>My Library</h1>
+    <p>Koleksi buku yang sudah kamu beli</p>
+  </div>
+
+  <!-- SEARCH (berfungsi pindah halaman) -->
+
+  <div class="library">
+    <!-- Buku A -->
+    <div class="book-card">
+      <label class="fav-container">
+        <input type="checkbox">
+        <span class="heart">â¤</span>
+      </label>
+
+      <img src="laut bercerita.jpg">
+      <h3>Laut Bercerita</h3>
+      <p>Leila S. Chudori</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 60%;"></div>
+      </div>
+      <div class="progress-text">60%</div>
+      <button class="read-btn" onclick="location.href='detail.html'">
+        Continue Reading
+      </button>
+    </div>
+    <!-- Buku B -->
+    <div class="book-card">
+      <label class="fav-container">
+        <input type="checkbox">
+        <span class="heart">â¤</span>
+      </label>
+      <img src="Seporsi.jpg">
+      <h3>Seporsi Mie Ayam</h3>
+      <p>Brian Khrisna</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 30%;"></div>
+      </div>
+      <div class="progress-text">30%</div>
+      <button class="read-btn" onclick="location.href='detail.html'">
+        Continue Reading
+      </button>
+    </div>
+    <!-- Buku C -->
+    <div class="book-card">
+      <label class="fav-container">
+        <input type="checkbox">
+        <span class="heart">â¤</span>
+      </label>
+      <img src="Atomic.jpg">
+      <h3>Atomic Habits</h3>
+      <p>James Clear</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 80%;"></div>
+      </div>
+      <div class="progress-text">80%</div>
+      <button class="read-btn" onclick="window.open('./Atomic%20Habits.pdf')">
+        Continue Reading
+      </button>
+    </div>
+
+    <!-- Buku D -->
+    <div class="book-card">
+      <label class="fav-container">
+        <input type="checkbox">
+        <span class="heart">â¤</span>
+      </label>
+      <img src="https://via.placeholder.com/120x160">
+      <h3>Judul Buku D</h3>
+      <p>Penulis D</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 45%;"></div>
+      </div>
+      <div class="progress-text">45%</div>
+      <button class="read-btn" onclick="location.href='detail.html'">
+        Continue Reading
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    function normalizeBook(item) {
+      const title = item.title || item.judul || 'Buku E-Libro';
+      const author = item.author || item.penulis || 'Penulis E-Libro';
+      const image = item.image || item.gambar || item.cover || 'https://placehold.co/180x240/5D3023/F2E9DC?text=Book';
+      const savedDetailUrl = item.detailUrl || item.detail || '';
+      const isAtomicHabits = title.toLowerCase().includes('atomic habits');
+      const detailUrl = isAtomicHabits ? './Atomic%20Habits.pdf' : (savedDetailUrl && savedDetailUrl !== '#' ? savedDetailUrl : '#');
+      return { id: item.id || title, title, author, image, progress: Number(item.progress) || 0, detailUrl };
+    }
+
+    function getPurchasedBooks() {
+      const library = JSON.parse(localStorage.getItem('elibroLibrary')) || [];
+      const orders = JSON.parse(localStorage.getItem('orderHistory')) || [];
+      const merged = [...library, ...orders].map(normalizeBook);
+      const unique = [];
+      merged.forEach(book => {
+        if (!unique.some(item => String(item.id) === String(book.id))) unique.push(book);
+      });
+      return unique;
+    }
+
+    function removeBook(bookId) {
+      if (!confirm('Hapus buku ini dari My Library?')) return;
+
+      const removeById = (storageKey) => {
+        const books = JSON.parse(localStorage.getItem(storageKey)) || [];
+        const updatedBooks = books.filter(item => String(normalizeBook(item).id) !== String(bookId));
+        localStorage.setItem(storageKey, JSON.stringify(updatedBooks));
+      };
+
+      removeById('elibroLibrary');
+      removeById('orderHistory');
+      renderLibrary();
+    }
+
+    function renderLibrary() {
+      const grid = document.querySelector('.library');
+      const books = getPurchasedBooks();
+      if (!grid) return;
+
+      if (!books.length) {
+        grid.innerHTML = '<div class="elibro-empty-state">Belum ada buku yang dibeli. Buku akan muncul di sini setelah checkout berhasil.</div>';
+        return;
+      }
+
+      grid.innerHTML = books.map(book => `
+        <div class="book-card">
+          <label class="fav-container">
+            <input type="checkbox">
+            <span class="heart">&#10084;</span>
+          </label>
+          <img src="${book.image}" alt="${book.title}">
+          <h3>${book.title}</h3>
+          <p>${book.author}</p>
+          <div class="progress">
+            <div class="progress-bar" style="width: ${book.progress}%;"></div>
+          </div>
+          <div class="progress-text">${book.progress}%</div>
+          <button class="read-btn" onclick="location.href='${book.detailUrl !== '#' ? book.detailUrl : 'Explore.html'}'">
+            Continue Reading
+          </button>
+          <button class="delete-btn" onclick='removeBook(${JSON.stringify(book.id)})'>
+            Hapus Buku
+          </button>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', renderLibrary);
+  </script>
+  <script src="shared-layout.js" defer></script>
+  <script src="responsive-nav.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+

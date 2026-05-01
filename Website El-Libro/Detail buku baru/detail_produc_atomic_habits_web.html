@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Libro - Detail Buku Atomic Habits</title>
+
+  <style>
+    :root {
+      --cream: #f5ede6;
+      --brown: #7b3f2a;
+      --brown-dark: #5f3112;
+      --white: #ffffff;
+      --text: #2b2b2b;
+      --border: #e6d7ca;
+      --gold: #f4b400;
+      --red: #e74c3c;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family:'Segoe UI',sans-serif;
+      background:var(--cream);
+      color:var(--text);
+    }
+
+    .header {
+      background:var(--white);
+      padding:18px 40px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+
+    .search-bar { width:45%; }
+
+    .search-bar input {
+      width:100%;
+      padding:12px 18px;
+      border:1px solid var(--border);
+      border-radius:30px;
+    }
+
+    .container {
+      max-width:1300px;
+      margin:40px auto;
+      padding:0 30px;
+    }
+
+    .product-section {
+      display:grid;
+      grid-template-columns:420px 1fr;
+      gap:50px;
+      align-items:start;
+    }
+
+    .book-image {
+      background:var(--white);
+      padding:20px;
+      border-radius:20px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .book-image img {
+      width:100%;
+      border-radius:15px;
+    }
+
+    .details h1 {
+      font-size:46px;
+      color:var(--brown-dark);
+      margin-bottom:10px;
+    }
+
+    .author {
+      margin:10px 0 20px;
+      color:#7d6a5d;
+      font-size:20px;
+    }
+
+    .price {
+      font-size:52px;
+      color:var(--brown);
+      font-weight:bold;
+    }
+
+    .old-price {
+      font-size:26px;
+      color:#999;
+      text-decoration:line-through;
+      margin-left:10px;
+    }
+
+    .discount {
+      display:inline-block;
+      margin:15px 0;
+      padding:6px 12px;
+      border:1px solid #f0d0cc;
+      border-radius:8px;
+      color:var(--red);
+      background:#fff;
+      font-weight:bold;
+    }
+
+    .actions {
+      display:flex;
+      gap:15px;
+      margin:25px 0;
+    }
+
+    .btn {
+      padding:14px 24px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    .btn-primary {
+      background:var(--brown);
+      color:white;
+    }
+
+    .btn-primary:hover {
+      background:var(--brown-dark);
+    }
+
+    .btn-secondary {
+      background:white;
+      border:1px solid var(--border);
+      color:var(--brown);
+    }
+
+    .btn-secondary.active {
+      background:#fff0f0;
+      color:var(--red);
+      border-color:var(--red);
+    }
+
+    .scroll-box {
+      background:white;
+      border:1px solid var(--border);
+      padding:20px;
+      border-radius:15px;
+      max-height:250px;
+      overflow-y:auto;
+      line-height:1.8;
+      text-align:justify;
+    }
+
+    /* REVIEW */
+    .reviews {
+      margin-top:60px;
+      background:var(--white);
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .review-card {
+      border-bottom:1px solid var(--border);
+      padding:20px 0;
+    }
+
+    .review-card:last-child {
+      border-bottom:none;
+    }
+
+    .stars {
+      color:var(--gold);
+      font-size:24px;
+      margin-bottom:10px;
+    }
+
+    .reviewer {
+      font-weight:bold;
+      color:var(--brown);
+      margin-bottom:8px;
+    }
+  </style>
+  <link rel="stylesheet" href="../shared-layout.css">
+    <link rel="stylesheet" href="../responsive.css" />
+  </head>
+
+<body>
+
+<div class="header">
+  <img src="logo-removebg-preview.png" style="width:120px;">
+  <div class="search-bar">
+    <input type="text" placeholder="Cari buku...">
+  </div>
+</div>
+
+<div class="container">
+  <div class="product-section">
+    <div class="book-image">
+      <img src="https://image.gramedia.net/rs:fit:0:0/plain/https://cdn.gramedia.com/uploads/items/9786020633176_.Atomic_Habit.jpg">
+    </div>
+
+    <div class="details">
+      <h1>Atomic Habits</h1>
+      <div class="author">James Clear</div>
+
+      <div class="price">
+        Rp120.000
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="tambahKeKeranjang()">Keranjang</button>
+      </div>
+
+      <h2>Deskripsi</h2>
+     <div class="scroll-box">
+            Atomic Habits: Perubahan Kecil yang Memberikan Hasil Luar Biasa adalah buku kategori self improvement karya James Clear. Pada umumnya, perubahan-perubahan kecil seringkali terkesan tak bermakna karena tidak langsung membawa perubahan nyata pada hidup suatu manusia. Jika diumpamakan sekeping koin tidak bisa menjadikan kaya, suatu perubahan positif seperti meditasi selama satu menit atau membaca buku satu halaman setiap hari mustahil menghasilkan perbedaan yang bisa terdeteksi. Namun hal tersebut tidak sejalan dengan pemikiran James Clear, ia merupakan seorang pakar dunia yang terkenal dengan 'habits' atau kebiasaan. Ia tahu bahwa tiap perbaikan kecil bagaikan menambahkan pasir ke sisi positif timbangan dan akan menghasilkan perubahan nyata yang berasal dari efek gabungan ratusan bahkan ribuan keputusan kecil. Ia menamakan perubahan kecil yang membawa pengaruh yang luar biasa dengan nama atomic habits.
+            <br><br>
+            Dalam buku ini James Clear, seorang penulis sekaligus pembicara yang sangat terkenal akan topik 'habit' memaparkan bahwa pada hakikatnya sebuah perubahan kecil (Atomic Habit) sering dianggap remeh, sebenarnya akan memberikan hasil yang sangat menjanjikan dalam hidup. Yang dipandang penting dalam perubahan perilaku bukan satu persen perbaikan tunggal, melainkan ribuan perbaikan atau sekumpulan atomic habits yang saling bertumpuk dan menjadi unit dasar dalam suatu sistem yang penting.
+            James Clear menjelaskan bahwa terdapat tiga tingkat perubahan yaitu perubahan hasil, perubahan proses, dan perubahan identitas. Cara paling efektif dalam mengubah kebiasaan adalah bukan berfokus pada apa yang ingin dicapai, melainkan tipe orang seperti apa yang diinginkan. Identitas seseorang muncul dari kebiasaan yang dilakukan setiap harinya. Alasan utama kebiasaan penting karena kebiasaan dapat mengubah keyakinan tentang diri sendiri.
+            Clear juga memperkenalkan empat Kaidah Perubahan Perilaku untuk membantu mengubah perilaku manusia yaitu menjadikannya terlihat, menjadikannya menarik, menjadikannya mudah, menjadikannya memuaskan. Keempat kaidah ini tidak hanya mengajari kita cara menciptakan kebiasaan-kebiasaan baru, melainkan menyingkapi sejumlah wawasan menarik tentang perilaku manusia.
+          </div>
+    </div>
+  </div>
+
+  <!-- REVIEW -->
+  <div class="reviews">
+    <h2>Ulasan Pembaca</h2>
+
+    <div class="review-card">
+      <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <div class="reviewer">Alya</div>
+      <p>Sangat membantu memahami kebiasaan kecil yang berdampak besar.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <div class="reviewer">Raka</div>
+      <p>Wajib dibaca untuk yang ingin berkembang secara konsisten.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <div class="reviewer">Nadia</div>
+      <p>Inspiratif dan mudah dipraktikkan dalam kehidupan sehari-hari.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function tambahKeKeranjang() {
+  const buku = {
+    id: 101,
+    title: "Atomic Habits",
+    author: "James Clear",
+    price: 120000,
+    discountPrice: 120000,
+    image: "https://image.gramedia.net/rs:fit:0:0/plain/https://cdn.gramedia.com/uploads/items/9786020633176_.Atomic_Habit.jpg",
+    format: "E-Book",
+    quantity: 1
+  };
+
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  const existing = cartItems.find(i => i.id === buku.id);
+
+  if (existing) existing.quantity++;
+  else cartItems.push(buku);
+
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  window.location.href = "../Keranjang E-Libro web.html";
+}
+</script>
+
+  <script src="../shared-layout.js" defer></script>
+  <script src="../responsive-nav.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,767 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Libro â€” E-Book Store Premium</title>
+    <link rel="stylesheet" href="Homepage/style.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <style>
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--nav-h);
+            background: rgba(242, 233, 220, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(192, 133, 82, 0.15);
+            transition: box-shadow var(--transition);
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 24px rgba(93, 48, 35, 0.10);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--chocolate);
+            letter-spacing: -0.01em;
+        }
+
+        .logo-sub {
+            font-size: 0.62rem;
+            color: var(--copper);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.5rem 0.9rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-soft);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition);
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background: rgba(192, 133, 82, 0.1);
+            color: var(--chocolate);
+        }
+
+        .nav-icon {
+            width: 15px;
+            height: 15px;
+        }
+
+        .nav-account {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .nav-icon-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: var(--copper);
+            transition: all var(--transition);
+        }
+
+        .nav-icon-btn:hover {
+            background: rgba(192, 133, 82, 0.12);
+            color: var(--chocolate);
+        }
+
+        .icon-lg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn-login {
+            padding: 0.45rem 1.1rem;
+            background: var(--chocolate);
+            color: var(--ivory);
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: all var(--transition);
+        }
+
+        .btn-login:hover {
+            background: var(--copper);
+            transform: translateY(-1px);
+        }
+
+        .auth-user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--terracotta);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 2px solid var(--blush);
+        }
+
+        .user-name {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--chocolate);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+            border-radius: 6px;
+            transition: background var(--transition);
+        }
+
+        .hamburger:hover {
+            background: rgba(192, 133, 82, 0.12);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--chocolate);
+            border-radius: 2px;
+            transition: all var(--transition);
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: var(--nav-h) 0 0 0;
+            background: rgba(242, 233, 220, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition);
+        }
+
+        .mobile-menu.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .mobile-link {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--chocolate);
+            padding: 0.75rem 2rem;
+            border-radius: var(--radius-md);
+            transition: all var(--transition);
+            width: 100%;
+            text-align: center;
+        }
+
+        .mobile-link:hover {
+            background: rgba(192, 133, 82, 0.1);
+            color: var(--terracotta);
+        }
+
+        .mobile-signin {
+            margin-top: 1rem;
+            background: var(--chocolate);
+            color: var(--ivory) !important;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .mobile-signin:hover {
+            background: var(--copper) !important;
+        }
+
+
+        body {
+            background: #f6efe8;
+        }
+
+
+
+
+
+        /* HEADER */
+        .header {
+            padding: 30px 50px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        /* SEARCH */
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            outline: none;
+            border-radius: 12px;
+        }
+
+        .search-box button {
+            background: #b77b4b;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background: #6b3e26;
+        }
+
+        /* FILTER */
+        .filters {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filters button {
+            padding: 10px 16px;
+            border: none;
+            background: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .filters button:hover {
+            background: #b77b4b;
+            color: white;
+        }
+
+        /* TITLE */
+        .best-title {
+            padding: 0 50px;
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #5d3023;
+        }
+
+        /* SLIDER */
+        .slider {
+            overflow: hidden;
+            position: relative;
+            padding: 30px 50px;
+            max-width: 100%;
+            justify-content: center !important;
+        }
+
+        .slide-track {
+            display: flex;
+            gap: 20px;
+            width: fit-content;
+            animation: scroll 20s linear infinite;
+        }
+
+        .book-card {
+            background: white;
+            padding: 12px;
+            border-radius: 14px;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            min-width: 140px;
+        }
+
+        .book-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .book-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .book-card h3 {
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .book-card p {
+            font-size: 11px;
+            color: #777;
+        }
+
+        .price {
+            margin-top: 6px;
+            font-weight: bold;
+            font-size: 12px;
+            color: #6b3e26;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .slider:hover .slide-track {
+            animation-play-state: paused;
+        }
+
+        .slider::before,
+        .slider::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 50px;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .slider::before {
+            left: 0;
+            background: linear-gradient(to right, #f6efe8, transparent);
+        }
+
+        .slider::after {
+            right: 0;
+            background: linear-gradient(to left, #f6efe8, transparent);
+        }
+
+        /* GENRE */
+        .genre-container {
+            padding: 20px 50px 60px;
+        }
+
+        .genre-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .genre-header h2 {
+            font-size: 20px;
+            color: #5d3023;
+        }
+
+        .genre-header button {
+            background: #b77b4b;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .genre-header button:hover {
+            background: #6b3e26;
+        }
+
+        .shelf {
+            display: flex;
+            gap: 18px;
+            padding: 15px 10px 30px;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .shelf::-webkit-scrollbar {
+            display: none;
+        }
+
+        .shelf::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to bottom, #ddd, #bbb);
+            border-radius: 6px;
+        }
+
+        .shelf img {
+            width: 110px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .shelf img:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .genre-section {
+            margin-bottom: 40px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .menu a {
+                width: 50px;
+                height: 50px;
+            }
+
+            .main-content {
+                margin-left: 85px;
+                width: calc(100% - 85px);
+            }
+
+            .header,
+            .slider {
+                padding: 20px;
+            }
+
+            .genre-container {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="responsive.css" />
+  </head>
+
+<body>
+    <!-- ========== NAVBAR ========== -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+
+            <!-- Logo -->
+            <a href="../Website El-Libro/Homepage/Homepage.html" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="38" height="38">
+                        <!-- Open book left page -->
+                        <path d="M24 38 C24 38 10 33 7 15 L7 10 C7 10 17 13 24 22" stroke="#5D3023" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                        <!-- Open book right page lines -->
+                        <line x1="24" y1="22" x2="35" y2="14" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <line x1="24" y1="25" x2="36" y2="17" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <line x1="24" y1="28" x2="37" y2="21" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <line x1="24" y1="31" x2="37" y2="25" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <line x1="24" y1="34" x2="36" y2="29" stroke="#C08552" stroke-width="1.8"
+                            stroke-linecap="round" />
+                        <!-- Pixel dots -->
+                        <rect x="38" y="10" width="3" height="3" rx="0.5" fill="#895737" opacity="0.8" />
+                        <rect x="42" y="13" width="2.5" height="2.5" rx="0.5" fill="#C08552" opacity="0.6" />
+                        <rect x="40" y="17" width="2" height="2" rx="0.5" fill="#D9B49D" opacity="0.7" />
+                        <rect x="39" y="7" width="2" height="2" rx="0.5" fill="#5D3023" opacity="0.5" />
+                        <rect x="43" y="8" width="1.5" height="1.5" rx="0.5" fill="#C08552" opacity="0.4" />
+                        <rect x="44" y="18" width="1.5" height="1.5" rx="0.5" fill="#D9B49D" opacity="0.5" />
+                        <!-- Book base -->
+                        <path
+                            d="M7 10 C7 10 15.5 12 24 22 C32.5 12 41 10 41 10 L41 15 C41 33 27 38 24 38 C21 38 7 33 7 15 Z"
+                            stroke="#5D3023" stroke-width="0" fill="none" />
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name">E-Libro</span>
+                    <span class="logo-sub">E-book store</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="nav-links" id="navLinks">
+                <a href="../Website El-Libro/Explore.html" class="nav-link">
+                    <i data-lucide="search" class="nav-icon"></i> Explore Books
+                </a>
+                <a href="../Website El-Libro/About Us/about.html" class="nav-link">
+                    <i data-lucide="id-card-lanyard" class="nav-icon"></i> About Us
+                </a>
+                <a href="../Website El-Libro/mylibrary.html" class="nav-link">
+                    <i data-lucide="library" class="nav-icon"></i> My Library
+                </a>
+            
+                <a href="Keranjang E-Libro web.html" class="nav-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57L22 7H5.12"></path></svg> Keranjang</a>
+            </nav>
+
+            <!-- Account Area -->
+            <div class="nav-account">
+                <!-- Auth state â€” toggled by JS -->
+                <div id="authGuest" class="auth-guest">
+                    <a href="../Login Page/Login Page.html" class="btn-login">Sign In</a>
+                </div>
+                <div id="authUser" class="auth-user" style="display:none;">
+                    <div class="user-avatar" id="userAvatar">
+                        <span id="userInitial">U</span>
+                    </div>
+                    <span id="userNameDisplay" class="user-name">User</span>
+                </div>
+            </div>
+
+            <!-- Hamburger -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-nav">
+            <a href="../Explore.html" class="mobile-link" onclick="closeMobile()">Explore Books</a>
+            <a href="../Website El-Libro/About Us/about.html" class="mobile-link" onclick="closeMobile()">About Us</a>
+            <a href="../Website El-Libro/mylibrary.html" class="mobile-link" onclick="closeMobile()">My Library</a>
+        
+            <a href="Keranjang E-Libro web.html" class="mobile-link" onclick="closeMobile()">Keranjang</a>
+        </nav>
+    </div>
+
+   
+        <div class="genre-container">
+            <div class="genre-section">
+                <div class="genre-header">
+                    <h2>Self Improvement</h2>
+                </div>
+
+                <div class="shelf">
+                    <a href="Detail buku baru/detail_book_the_psychology_of_money_web.html">
+                        <img src="https://cdn.gramedia.com/uploads/items/psychology_of_money.jfif.png" />
+                    </a>
+                    <a href="Detail buku baru/detail_produc_atomic_habits_web.html">
+                        <img src="https://image.gramedia.net/rs:fit:0:0/plain/https://cdn.gramedia.com/uploads/items/9786020633176_.Atomic_Habit.jpg" />
+                    </a>
+                    <a href="Detail buku baru/detail_book_seporsi_mie_ayam_sebelum_mati_web.html">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHaHBjn2BM2xZaWZnJOtBLhtrrDAYOLgtyUg&s" />
+                    </a>
+                    <a href="Detail buku baru/detail_book_the_alpha_girl_s_guide_web.html">
+                        <img src="https://cdn.gramedia.com/uploads/items/THE_ALPHA_GIRLS_GUIDE.jpg" />
+                    </a>
+                    
+                    
+                    
+                </div>
+            </div>
+
+            <div class="genre-section">
+                <div class="genre-header">
+                <h2>Fiksi Ilmiah</h2>
+                </div>
+
+                <div class="shelf">
+                    <a href="Detail buku baru/detail_book_pulang_web.html">
+                        <img src="https://image.gramedia.net/rs:fit:0:0/plain/https://cdn.gramedia.com/uploads/items/pulang_tere_liye.jpeg" />
+                    </a><a href="Detail buku baru/detail_book_tentang_kamu_web.html">
+                        <img src="https://www.gramedia.com/blog/content/images/2022/02/Tentang-Kamu.jpg" />
+                    </a><a href="Detail buku baru/detail_book_neuromancer_web.html">
+                        <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1752514552i/6088007.jpg" />
+                    </a><a href="Detail buku baru/detail_book_dune_web.html">
+                        <img src="https://cdn.gramedia.com/uploads/picture_meta/2023/3/26/ih86gbr4urzmibs3ah49hq.jpg" />
+                    </a>
+                </div>
+            </div>
+
+            <div class="genre-section">
+                <div class="genre-header">
+                    <h2>Fantasi</h2>
+                </div>
+
+                <div class="shelf">
+                    <a href="Detail buku baru/detail_book_bumi_web.html">
+                        <img src="https://cdn.gramedia.com/uploads/items/9786020332956_Bumi-New-Cover.jpg" />
+                    </a><a href="Detail buku baru/detail_book_bulan_web.html">
+                        <img src="https://image.gramedia.net/rs:fit:0:0/plain/https://cdn.gramedia.com/uploads/items/img20220905_11324048.jpg" />
+                    </a><a href="Detail buku baru/detail_book_matahri_web.html">
+                        <img src="https://image.gramedia.net/rs:fit:0:0/plain/https://cdn.gramedia.com/uploads/items/img20220905_11433462.jpg" />
+                    </a><a href="Detail buku baru/detail_book_bintang_web.html"><img src="https://image.gramedia.net/rs:fit:0:0/plain/https://cdn.gramedia.com/uploads/picture_meta/2023/4/10/ccmq4kges6gstnsrrtxabw.jpg" /></a>
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+            <footer class="footer">
+        <div class="container">
+
+            <!-- Divider ornament -->
+            <div class="footer-ornament">
+                <span class="ornament-line"></span>
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
+                    <path d="M16 26 C16 26 5 22 3 10 L3 7 C3 7 10 9 16 16" stroke="#C08552" stroke-width="1.8"
+                        stroke-linecap="round" fill="none" />
+                    <line x1="16" y1="16" x2="23" y2="10" stroke="#895737" stroke-width="1.4" stroke-linecap="round" />
+                    <line x1="16" y1="18" x2="24" y2="13" stroke="#895737" stroke-width="1.4" stroke-linecap="round" />
+                    <line x1="16" y1="20" x2="24" y2="16" stroke="#895737" stroke-width="1.4" stroke-linecap="round" />
+                    <line x1="16" y1="22" x2="24" y2="19" stroke="#895737" stroke-width="1.4" stroke-linecap="round" />
+                    <rect x="25" y="7" width="2.5" height="2.5" rx="0.4" fill="#C08552" opacity="0.7" />
+                    <rect x="28" y="10" width="2" height="2" rx="0.4" fill="#D9B49D" opacity="0.5" />
+                </svg>
+                <span class="ornament-line"></span>
+            </div>
+
+            <!-- About Us centered block -->
+            <div class="footer-about">
+                <div class="footer-logo-wrap">
+                    <span class="footer-logo-name">E-Libro</span>
+                    <span class="footer-logo-sub">E-book store</span>
+                </div>
+
+                <p class="footer-about-text">
+                    E-Libro adalah platform literasi digital premium Indonesia yang hadir untuk mendekatkan pembaca
+                    dengan buku-buku terbaik dunia. Kami percaya bahwa setiap buku adalah jendela menuju dunia yang
+                    belum pernah kamu jelajahi â€” dan misi kami adalah membuka jendela itu selebar-lebarnya.
+                </p>
+
+                <div class="footer-stats-row">
+                    <div class="f-stat">
+                        <span class="f-stat-num">10K+</span>
+                        <span class="f-stat-label">Judul Buku</span>
+                    </div>
+                    <div class="f-stat-dot"></div>
+                    <div class="f-stat">
+                        <span class="f-stat-num">50K+</span>
+                        <span class="f-stat-label">Pembaca Aktif</span>
+                    </div>
+                    <div class="f-stat-dot"></div>
+                    <div class="f-stat">
+                        <span class="f-stat-num">1.2K+</span>
+                        <span class="f-stat-label">Penulis Indie</span>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <div class="footer-bottom">
+                <p>Â© 2025 E-Libro. Semua hak dilindungi undang-undang.</p>
+                <div class="footer-bottom-links">
+                    <a href="Privasi, Ketentuan, About Us/Privasi.html">Privasi</a>
+                    <a href="Privasi, Ketentuan, About Us/Ketentuan.html">Ketentuan</a>
+                    <a href="About Us/about.html">About Us</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    </div>
+  <script src="responsive-nav.js"></script>
+</body>
+
+<script src="Homepage/script.js"></script>
+
+</html>
+
+

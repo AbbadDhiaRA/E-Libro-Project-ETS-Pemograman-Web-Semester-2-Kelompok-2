@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Libro - Detail Buku The Psychology of Money</title>
+  <style>
+    :root {
+      --cream: #f5ede6;
+      --brown: #7b3f2a;
+      --brown-dark: #5f3112;
+      --white: #ffffff;
+      --text: #2b2b2b;
+      --border: #e6d7ca;
+      --gold: #f4b400;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+    }
+
+    .header {
+      background: var(--white);
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    /* disamakan */
+    .logo img { width: 120px; }
+
+    .search-bar { width: 45%; }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 30px;
+    }
+
+    .product-section {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .book-image {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .book-image img {
+      width: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+
+    .details h1 {
+      font-size: 46px;
+      color: var(--brown-dark);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .author {
+      font-size: 20px;
+      color: #7d6a5d;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 52px;
+      font-weight: bold;
+      color: var(--brown);
+      margin-bottom: 15px;
+    }
+
+    .old-price {
+      font-size: 26px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 10px;
+    }
+
+    .discount {
+      display: inline-block;
+      background: #fff;
+      color: #c0392b;
+      border: 1px solid #f0d0cc;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--brown);
+      color: white;
+    }
+
+    /* disamakan (tanpa hover tambahan) */
+    .btn-secondary {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--brown);
+    }
+
+    .btn-secondary.active {
+      background: #ffe6ea;
+      color: #c0392b;
+      border-color: #f5b7c1;
+    }
+
+    .description {
+      margin-top: 30px;
+    }
+
+    .description h2,
+    .reviews h2 {
+      color: var(--brown-dark);
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+
+    /* disamakan */
+    .scroll-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      max-height: 260px;
+      overflow-y: auto;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    /* disamakan */
+    .reviews {
+      margin-top: 60px;
+      background: var(--white);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .review-card {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+
+    .review-card:last-child { border-bottom: none; }
+
+    .stars {
+      color: var(--gold);
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .reviewer {
+      font-weight: bold;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .product-section { grid-template-columns: 1fr; }
+      .search-bar { width: 60%; }
+      .details h1 { font-size: 34px; }
+      .price { font-size: 40px; }
+    }
+  </style>
+  <link rel="stylesheet" href="../shared-layout.css">
+    <link rel="stylesheet" href="../responsive.css" />
+  </head>
+
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="logo-removebg-preview.png" alt="E-Libro Logo">
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Cari judul buku, penulis, atau kategori...">
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="product-section">
+      <div class="book-image">
+        <img src="https://cdn.gramedia.com/uploads/items/psychology_of_money.jfif.png" alt="Cover The Psychology of Money">
+      </div>
+
+      <div class="details">
+        <div class="author">Morgan Housel</div>
+        <h1>The Psychology of Money</h1>
+
+        <div class="price">
+          Rp89.000
+        </div>
+
+        <div class="discount">Diskon 11%</div>
+
+        <div class="actions">
+          <button class="btn btn-primary" onclick="tambahKeranjang()">Keranjang</button>
+        </div>
+
+        <div class="description">
+          <h2>Deskripsi Buku</h2>
+          <div class="scroll-box">
+            Kesuksesan dalam mengelola uang tidak selalu tentang apa yang Anda ketahui. Ini tentang bagaimana Anda berperilaku. Dan perilaku sulit untuk diajarkan, bahkan kepada orang yang sangat pintar sekalipun. Seorang genius yang kehilangan kendali atas emosinya bisa mengalami bencana keuangan. Sebaliknya, orang biasa tanpa pendidikan finansial bisa kaya jika mereka punya sejumlah keahlian terkait perilaku yang tidak berhubungan dengan ukuran kecerdasan formal.
+            <br><br>
+            Uang, investasi, keuangan pribadi, dan keputusan bisnis biasanya diajarkan sebagai bidang berbasis matematika dengan data dan rumus memberi tahu kita apa yang harus dilakukan. Namun, di dunia nyata orang tidak membuat keputusan finansial di spreadsheet. Mereka membuatnya di meja makan atau di ruang rapat, di mana sejarah pribadi, pandangan unik tentang dunia, ego, kebanggaan, pemasaran, dan berbagai insentif bercampur.
+            <br><br>
+            Dalam buku ini, Morgan Housel membagikan 19 cerita pendek yang mengeksplorasi cara-cara unik manusia berpikir tentang uang. Buku ini membantu pembaca memahami keuangan dari sudut pandang perilaku manusia, sehingga Anda dapat mengelola uang dengan lebih bijak, rasional, dan efektif dalam kehidupan sehari-hari.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews">
+      <h2>Ulasan Pembaca</h2>
+
+      <div class="review-card">
+        <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <div class="reviewer">Elsa</div>
+        <p>Buku ini membuka cara pandang saya tentang uang.</p>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <div class="reviewer">Nia</div>
+        <p>Wajib dibaca untuk mengelola keuangan.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function tambahKeranjang() {
+      const buku = {
+        id: 113,
+        title: 'The Psychology of Money',
+        author: 'Morgan Housel',
+        price: 89000,
+        discountPrice: 89000,
+        image: 'https://cdn.gramedia.com/uploads/items/psychology_of_money.jfif.png',
+        format: 'E-Book',
+        quantity: 1
+      };
+
+      let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      const existingBook = cartItems.find(item => item.id === buku.id);
+
+      if (existingBook) {
+        existingBook.quantity += 1;
+      } else {
+        cartItems.push(buku);
+      }
+
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      window.location.href = '../Keranjang E-Libro web.html';
+    }
+  </script>
+  <script src="../shared-layout.js" defer></script>
+  <script src="../responsive-nav.js"></script>
+</body>
+</html>
+
+

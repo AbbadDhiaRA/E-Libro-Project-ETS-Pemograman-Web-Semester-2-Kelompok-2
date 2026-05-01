@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Libro â€” Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="Login Page.css">
+    <link rel="stylesheet" href="../responsive.css" />
+  </head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- Left decorative panel -->
+  <div class="panel-left">
+    <div class="left-brand">
+      E-Libro
+      <span>Your digital library</span>
+    </div>
+
+    <div class="left-quote">
+      <blockquote>"A reader lives a thousand lives before he dies."</blockquote>
+      <cite>â€” George R.R. Martin</cite>
+    </div>
+
+    <!-- Decorative book spines -->
+    <div class="left-books">
+      <div class="book-spine" style="height:70px;background:#fff;"></div>
+      <div class="book-spine" style="height:55px;background:#fff;"></div>
+      <div class="book-spine" style="height:80px;background:#fff;"></div>
+      <div class="book-spine" style="height:62px;background:#fff;"></div>
+      <div class="book-spine" style="height:74px;background:#fff;"></div>
+      <div class="book-spine" style="height:50px;background:#fff;"></div>
+      <div class="book-spine" style="height:68px;background:#fff;"></div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="panel-right">
+    <div class="form-heading">
+      <h1>Welcome back</h1>
+      <p>Sign in to continue reading</p>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" id="email" placeholder="you@example.com" autocomplete="email" />
+    </div>
+
+    <div class="form-group">
+      <div class="input-row">
+        <label for="password">Password</label>
+      </div>
+      <input type="password" id="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" autocomplete="current-password" />
+    </div>
+
+    <div class="remember-row">
+      <input type="checkbox" id="remember" />
+      <label for="remember">Keep me signed in</label>
+    </div>
+
+    <button class="btn-signin" onclick="handleLogin()">Sign in</button>
+
+    
+
+    
+  </div>
+
+</div>
+
+<script src="Login Page.js"></script>
+
+  <script src="../responsive-nav.js"></script>
+</body>
+</html>
+

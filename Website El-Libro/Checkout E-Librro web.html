@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Libro - Checkout</title>
+  <style>
+    :root {
+      --ivory: #F2E9DC;
+      --terracotta: #C08552;
+      --brown: #5D3023;
+      --copper: #895737;
+      --beige: #D9B49D;
+      --green: #2E8B57;
+      --white: #ffffff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:var(--ivory);color:var(--brown)}
+    .container{max-width:1400px;margin:auto;padding:30px 20px}
+    h1{font-size:2.4rem;margin-bottom:25px}
+    .layout{display:grid;grid-template-columns:2fr 1fr;gap:30px}
+    .card{background:#fff;border-radius:20px;padding:25px;box-shadow:0 10px 30px rgba(0,0,0,.08);margin-bottom:25px}
+    .form-group{margin-bottom:16px}
+    label{display:block;margin-bottom:8px;font-weight:700}
+    input,textarea{width:100%;padding:14px;border:2px solid #ddd;border-radius:12px;font-size:1rem}
+    textarea{min-height:120px;resize:vertical}
+    .save-btn,.checkout-btn{width:100%;padding:15px;border:none;border-radius:14px;font-weight:700;cursor:pointer;margin-top:12px}
+    .save-btn{background:var(--terracotta);color:#fff}
+    .save-btn.saved{background:var(--green)}
+    .checkout-btn{background:var(--brown);color:#fff}
+    .item{display:flex;gap:15px;padding:15px 0;border-bottom:1px solid #eee;align-items:center}
+    .item img{width:80px;height:110px;object-fit:cover;border-radius:10px}
+    .item:last-child{border-bottom:none}
+    .summary-row{display:flex;justify-content:space-between;margin:14px 0}
+    .total-row{border-top:2px solid #eee;padding-top:18px;margin-top:18px;font-size:1.2rem;font-weight:700}
+    .success-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center}
+    .success-content{background:#fff;padding:35px;border-radius:20px;text-align:center;max-width:450px}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}}
+  </style>
+  <link rel="stylesheet" href="shared-layout.css">
+    <link rel="stylesheet" href="responsive.css" />
+  </head>
+<body>
+  <div class="container">
+    <h1>Checkout</h1>
+    <div class="layout">
+      <div>
+        <div class="card">
+          <h2 style="margin-bottom:20px">Alamat Pengiriman</h2>
+          <div class="form-group">
+            <label>Nama Penerima</label>
+            <input type="text" id="recipientName" placeholder="Masukkan nama penerima">
+          </div>
+          <div class="form-group">
+            <label>Nomor Telepon</label>
+            <input type="tel" id="recipientPhone" placeholder="Masukkan nomor telepon">
+          </div>
+          <div class="form-group">
+            <label>Alamat Lengkap</label>
+            <textarea id="recipientAddress" placeholder="Masukkan alamat lengkap"></textarea>
+          </div>
+          <button id="saveAddressBtn" class="save-btn" onclick="saveAddress()">Simpan Alamat</button>
+        </div>
+
+        <div class="card">
+          <h2 style="margin-bottom:20px">Pesanan Anda</h2>
+          <div id="checkoutItemsContainer"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Ringkasan Pembayaran</h2>
+        <div class="summary-row"><span>Total Item</span><span id="totalItems">0</span></div>
+        <div class="summary-row"><span>Total Harga</span><span id="subtotal">Rp 0</span></div>
+        <div class="summary-row"><span>Diskon</span><span id="discount">-Rp 0</span></div>
+        <div class="summary-row"><span>Ongkos Kirim</span><span id="shipping">Rp 15.000</span></div>
+        <div class="summary-row total-row"><span>Total Bayar</span><span id="grandTotal">Rp 0</span></div>
+        <button class="checkout-btn" onclick="placeOrder()">Bayar Sekarang</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="successModal" class="success-modal">
+    <div class="success-content">
+      <h2 style="color:var(--green);margin-bottom:15px">Pembayaran Berhasil!</h2>
+      <p>Buku yang kamu beli sudah masuk ke My Library.</p>
+      <button class="checkout-btn" onclick="closeModal()">Buka My Library</button>
+    </div>
+  </div>
+
+  <script>
+    function normalizeBook(item) {
+      const title = item.title || item.judul || 'Buku E-Libro';
+      const author = item.author || item.penulis || 'Penulis E-Libro';
+      const price = Number(item.price ?? item.harga ?? item.discountPrice ?? item.hargaDiskon ?? 0) || 0;
+      const discountPrice = Number(item.discountPrice ?? item.hargaDiskon ?? item.price ?? item.harga ?? 0) || 0;
+      const image = item.image || item.gambar || item.cover || 'https://placehold.co/180x240/5D3023/F2E9DC?text=Book';
+      return { id: item.id || title, title, author, price, discountPrice, image, format: item.format || item.tipe || 'E-Book', quantity: Number(item.quantity) || 1, detailUrl: item.detailUrl || '#' };
+    }
+
+    let checkoutItems = (JSON.parse(localStorage.getItem('checkoutItems')) || []).map(normalizeBook);
+
+    if (!checkoutItems || checkoutItems.length === 0) {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      checkoutItems = cartItems.filter(item => (Number(item.quantity) || 0) > 0).map(normalizeBook);
+    }
+
+    function formatRupiah(number) {
+      const value = Number(number) || 0;
+      return 'Rp ' + value.toLocaleString('id-ID');
+    }
+
+    function renderCheckoutItems() {
+      const container = document.getElementById('checkoutItemsContainer');
+      if (!checkoutItems.length) {
+        container.innerHTML = '<p>Tidak ada item untuk checkout.</p>';
+        return;
+      }
+
+      container.innerHTML = checkoutItems.map(item => `
+        <div class="item">
+          <img src="${item.image}" alt="${item.title}">
+          <div style="flex:1">
+            <h3>${item.title}</h3>
+            <p>${item.author}</p>
+            <p>Jumlah: ${Number(item.quantity) || 1}</p>
+          </div>
+          <strong>${formatRupiah((Number(item.discountPrice) || 0) * (Number(item.quantity) || 1))}</strong>
+        </div>
+      `).join('');
+    }
+
+    function updateSummary() {
+      const shipping = 15000;
+      const totalItems = checkoutItems.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+      const subtotal = checkoutItems.reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.quantity) || 0)), 0);
+      const total = checkoutItems.reduce((sum, item) => sum + ((Number(item.discountPrice) || 0) * (Number(item.quantity) || 0)), 0);
+      const discount = subtotal - total;
+      const grandTotal = total + shipping;
+
+      document.getElementById('totalItems').textContent = totalItems;
+      document.getElementById('subtotal').textContent = formatRupiah(subtotal);
+      document.getElementById('discount').textContent = '-' + formatRupiah(discount);
+      document.getElementById('grandTotal').textContent = formatRupiah(grandTotal);
+    }
+
+    function saveAddress() {
+      const addressData = {
+        name: document.getElementById('recipientName').value,
+        phone: document.getElementById('recipientPhone').value,
+        address: document.getElementById('recipientAddress').value
+      };
+
+      localStorage.setItem('shippingAddress', JSON.stringify(addressData));
+
+      const btn = document.getElementById('saveAddressBtn');
+      btn.textContent = 'âœ“ Tersimpan';
+      btn.classList.add('saved');
+    }
+
+    function loadAddress() {
+      const saved = JSON.parse(localStorage.getItem('shippingAddress'));
+      if (!saved) return;
+
+      document.getElementById('recipientName').value = saved.name || '';
+      document.getElementById('recipientPhone').value = saved.phone || '';
+      document.getElementById('recipientAddress').value = saved.address || '';
+
+      const btn = document.getElementById('saveAddressBtn');
+      btn.textContent = 'âœ“ Tersimpan';
+      btn.classList.add('saved');
+    }
+
+    function placeOrder() {
+      const existingOrders = JSON.parse(localStorage.getItem('orderHistory')) || [];
+      localStorage.setItem('orderHistory', JSON.stringify([...existingOrders, ...checkoutItems]));
+      const library = JSON.parse(localStorage.getItem('elibroLibrary')) || [];
+      checkoutItems.forEach(book => {
+        if (!library.some(saved => String(saved.id) === String(book.id))) library.push(book);
+      });
+      localStorage.setItem('elibroLibrary', JSON.stringify(library));
+
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      const remaining = cartItems.filter(cartItem =>
+        !checkoutItems.some(checkoutItem => checkoutItem.id === cartItem.id)
+      );
+
+      localStorage.setItem('cartItems', JSON.stringify(remaining));
+      localStorage.removeItem('checkoutItems');
+      document.getElementById('successModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('successModal').style.display = 'none';
+      window.location.href = 'mylibrary.html';
+    }
+
+    loadAddress();
+    renderCheckoutItems();
+    updateSummary();
+  </script>
+  <script src="shared-layout.js" defer></script>
+  <script src="responsive-nav.js"></script>
+</body>
+</html>
+
+

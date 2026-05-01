@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Libro - Detail Buku Dune</title>
+
+  <style>
+    :root {
+      --cream:#f5ede6;
+      --brown:#7b3f2a;
+      --brown-dark:#5f3112;
+      --white:#ffffff;
+      --text:#2b2b2b;
+      --border:#e6d7ca;
+      --gold:#f4b400;
+      --red:#e74c3c;
+    }
+
+    * { box-sizing:border-box; margin:0; padding:0; }
+
+    body {
+      font-family:'Segoe UI',sans-serif;
+      background:var(--cream);
+      color:var(--text);
+    }
+
+    .header {
+      background:var(--white);
+      padding:18px 40px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+
+    .search-bar { width:45%; }
+
+    .search-bar input {
+      width:100%;
+      padding:12px 18px;
+      border:1px solid var(--border);
+      border-radius:30px;
+    }
+
+    .container {
+      max-width:1300px;
+      margin:40px auto;
+      padding:0 30px;
+    }
+
+    .product-section {
+      display:grid;
+      grid-template-columns:420px 1fr;
+      gap:50px;
+    }
+
+    .book-image {
+      background:var(--white);
+      padding:20px;
+      border-radius:20px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .book-image img {
+      width:100%;
+      border-radius:15px;
+    }
+
+    .details h1 {
+      font-size:46px;
+      color:var(--brown-dark);
+      margin-bottom:10px;
+    }
+
+    .author {
+      margin:10px 0 20px;
+      color:#7d6a5d;
+      font-size:20px;
+    }
+
+    .price {
+      font-size:52px;
+      color:var(--brown);
+      font-weight:bold;
+    }
+
+    .actions {
+      display:flex;
+      gap:15px;
+      margin:25px 0;
+    }
+
+    .btn {
+      padding:14px 24px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    .btn-primary {
+      background:var(--brown);
+      color:white;
+    }
+
+    .btn-primary:hover {
+      background:var(--brown-dark);
+    }
+
+    .btn-secondary {
+      background:white;
+      border:1px solid var(--border);
+      color:var(--brown);
+    }
+
+    .btn-secondary.active {
+      background:#fff0f0;
+      color:var(--red);
+      border-color:var(--red);
+    }
+
+    .scroll-box {
+      background:var(--white);
+      border:1px solid var(--border);
+      padding:20px;
+      border-radius:15px;
+      max-height:250px;
+      overflow-y:auto;
+      line-height:1.8;
+      text-align:justify;
+    }
+
+    .reviews {
+      margin-top:60px;
+      background:var(--white);
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .review-card {
+      border-bottom:1px solid var(--border);
+      padding:20px 0;
+    }
+
+    .review-card:last-child {
+      border-bottom:none;
+    }
+
+    .stars {
+      color:var(--gold);
+      font-size:24px;
+      margin-bottom:10px;
+    }
+
+    .reviewer {
+      font-weight:bold;
+      color:var(--brown);
+      margin-bottom:8px;
+    }
+  </style>
+  <link rel="stylesheet" href="../shared-layout.css">
+    <link rel="stylesheet" href="../responsive.css" />
+  </head>
+
+<body>
+
+<div class="header">
+  <img src="logo-removebg-preview.png" style="width:120px;">
+  <div class="search-bar">
+    <input type="text" placeholder="Cari buku...">
+  </div>
+</div>
+
+<div class="container">
+  <div class="product-section">
+    <div class="book-image">
+      <img src="https://cdn.gramedia.com/uploads/picture_meta/2023/3/26/ih86gbr4urzmibs3ah49hq.jpg">
+    </div>
+
+    <div class="details">
+      <h1>Dune</h1>
+      <div class="author">Frank Herbert</div>
+
+      <div class="price">Rp129.000</div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="tambahKeKeranjang()">Keranjang</button>
+      </div>
+
+      <h2>Deskripsi</h2>
+      <div class="scroll-box">
+        Di planet Arrakis, kisah seorang pemuda bernama Paul Atreides bermula. Ayah Paul ditunjuk sebagai penguasa planet gurun yang dikenal sebagai Dune.
+        <br><br>
+        Meski keras dan berbahaya, Arrakis menyimpan rempah paling berharga di alam semesta. Ketika keluarganya dikhianati, Paul harus bertahan hidup di padang pasir yang ganas.
+        Perjalanan ini membawanya menuju takdir besar yang akan mengubah masa depan Arrakis dan seluruh galaksi.
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews">
+    <h2>Ulasan Pembaca</h2>
+
+    <div class="review-card">
+      <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <div class="reviewer">Pradana</div>
+      <p>Peak sci-fi! Dunia yang dibangun sangat detail dan epik.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function tambahKeKeranjang() {
+  const buku = {
+    id: 105,
+    title: "Dune",
+    author: "Frank Herbert",
+    price: 129000,
+    discountPrice: 129000,
+    image: "https://cdn.gramedia.com/uploads/picture_meta/2023/3/26/ih86gbr4urzmibs3ah49hq.jpg",
+    format: "E-Book",
+    quantity: 1
+  };
+
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  const existing = cartItems.find(i => i.id === buku.id);
+
+  if (existing) existing.quantity++;
+  else cartItems.push(buku);
+
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  window.location.href = "../Keranjang E-Libro web.html";
+}
+</script>
+
+  <script src="../shared-layout.js" defer></script>
+  <script src="../responsive-nav.js"></script>
+</body>
+</html>
+
+

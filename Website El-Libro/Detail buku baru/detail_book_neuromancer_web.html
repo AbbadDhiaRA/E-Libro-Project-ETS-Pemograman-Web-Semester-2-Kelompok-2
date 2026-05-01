@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Libro - Detail Buku Neuromancer</title>
+
+  <style>
+    :root {
+      --cream: #f5ede6;
+      --brown: #7b3f2a;
+      --brown-dark: #5f3112;
+      --white: #ffffff;
+      --text: #2b2b2b;
+      --border: #e6d7ca;
+      --soft: #f9f4ef;
+      --gold: #f4b400;
+      --red: #e74c3c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+    }
+
+    .header {
+      background: var(--white);
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .search-bar {
+      width: 45%;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 30px;
+    }
+
+    .product-section {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .book-image {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .book-image img {
+      width: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+
+    .details h1 {
+      font-size: 46px;
+      color: var(--brown-dark);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .author {
+      font-size: 20px;
+      color: #7d6a5d;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 52px;
+      font-weight: bold;
+      color: var(--brown);
+      margin-bottom: 15px;
+    }
+
+    .old-price {
+      font-size: 26px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 10px;
+    }
+
+    .discount {
+      display: inline-block;
+      background: #fff;
+      color: #c0392b;
+      border: 1px solid #f0d0cc;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      margin: 25px 0;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--brown);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--brown-dark);
+    }
+
+    .btn-secondary {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--brown);
+    }
+
+    .btn-secondary.active {
+      background: #fff0f0;
+      color: var(--red);
+      border-color: var(--red);
+    }
+
+    .description {
+      margin-top: 30px;
+    }
+
+    .description h2,
+    .reviews h2 {
+      color: var(--brown-dark);
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+
+    .scroll-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      max-height: 250px;
+      overflow-y: auto;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .reviews {
+      margin-top: 60px;
+      background: var(--white);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .review-card {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+
+    .review-card:last-child {
+      border-bottom: none;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .reviewer {
+      font-weight: bold;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .product-section {
+        grid-template-columns: 1fr;
+      }
+
+      .search-bar {
+        width: 60%;
+      }
+
+      .details h1 {
+        font-size: 34px;
+      }
+
+      .price {
+        font-size: 40px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../shared-layout.css">
+    <link rel="stylesheet" href="../responsive.css" />
+  </head>
+
+<body>
+
+<div class="header">
+  <img src="logo-removebg-preview.png" style="width:120px;">
+  <div class="search-bar">
+    <input type="text" placeholder="Cari buku...">
+  </div>
+</div>
+
+<div class="container">
+  <div class="product-section">
+
+    <div class="book-image">
+      <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1752514552i/6088007.jpg">
+    </div>
+
+    <div class="details">
+      <h1>Neuromancer</h1>
+      <div class="author">William Gibson</div>
+
+      <div class="price">
+        Rp105.000
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="tambahKeKeranjang()">Keranjang</button>
+      </div>
+
+      <h2>Deskripsi</h2>
+     <div class="scroll-box">
+            Neuromancer adalah novel fiksi ilmiah legendaris karya William Gibson yang dianggap sebagai pelopor genre cyberpunk. Kisah ini mengikuti Case, seorang peretas ulung yang kehilangan kemampuannya untuk terhubung ke dunia maya setelah dikhianati. Ketika ia mendapat kesempatan kedua, Case terlibat dalam misi berbahaya yang melibatkan kecerdasan buatan, korporasi raksasa, dan dunia digital yang kompleks.
+            <br><br>
+            Dengan visi masa depan yang tajam, novel ini menghadirkan dunia distopia tempat teknologi, realitas virtual, dan jaringan informasi mengubah cara manusia hidup. Neuromancer menjadi karya klasik yang memengaruhi banyak film, game, dan karya fiksi ilmiah modern.
+          </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function tambahKeKeranjang() {
+  const buku = {
+    id: 108,
+    title: "Neuromancer",
+    author: "William Gibson",
+    price: 105000,
+    discountPrice: 105000,
+    image: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1752514552i/6088007.jpg",
+    format: "E-Book",
+    quantity: 1
+  };
+
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  const existing = cartItems.find(i => i.id === buku.id);
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cartItems.push(buku);
+  }
+
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  window.location.href = "../Keranjang E-Libro web.html";
+}
+</script>
+
+  <script src="../shared-layout.js" defer></script>
+  <script src="../responsive-nav.js"></script>
+</body>
+</html>
+
+

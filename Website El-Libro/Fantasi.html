@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>E-Libro - Fantasi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#F6EFE8;
+--primary:#5D3023;
+--accent:#B77B4B;
+--hover:#6B3E26;
+--soft:#F3E9DF;
+--white:#FFFFFF;
+--text-light:#8A8A8A;
+}
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:var(--bg);
+}
+
+/* HEADER */
+.header{
+padding:20px;
+}
+
+.title{
+font-size:20px;
+font-weight:600;
+color:var(--primary);
+}
+
+.subtitle{
+font-size:13px;
+color:var(--text-light);
+}
+
+/* SEARCH */
+.search-box{
+padding:0 20px;
+margin-bottom:10px;
+}
+
+.search-box input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:var(--white);
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+outline:none;
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
+padding:20px;
+}
+
+/* CARD */
+.card{
+background:var(--white);
+border-radius:20px;
+padding:12px;
+box-shadow:0 8px 20px rgba(93,48,35,0.08);
+position:relative;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+/* BADGE */
+.badge{
+position:absolute;
+top:10px;
+left:10px;
+background:#D1FAE5;
+color:#059669;
+padding:3px 8px;
+font-size:10px;
+border-radius:10px;
+}
+
+/* HEART */
+.heart input{display:none;}
+.heart label{
+position:absolute;
+top:10px;
+right:10px;
+font-size:16px;
+cursor:pointer;
+color:#C4B5A5;
+}
+.heart input:checked + label{
+color:#E11D48;
+}
+
+/* COVER */
+.cover{
+width:100%;
+height:480px;
+object-fit:cover;
+border-radius:12px;
+}
+
+/* INFO */
+.author{
+font-size:11px;
+color:var(--text-light);
+margin-top:8px;
+}
+
+.title-book{
+font-size:14px;
+font-weight:600;
+color:var(--primary);
+}
+
+.price{
+margin-top:6px;
+font-weight:bold;
+color:var(--accent);
+}
+
+/* PREVIEW LINK */
+.preview-link{
+margin-top:6px;
+font-size:11px;
+color:var(--accent);
+cursor:pointer;
+text-decoration:underline;
+}
+
+/* RESPONSIVE */
+@media(min-width:768px){
+.grid{grid-template-columns:repeat(4,1fr);}
+}
+</style>
+  <link rel="stylesheet" href="shared-layout.css">
+    <link rel="stylesheet" href="responsive.css" />
+  </head>
+
+<body>
+
+<div class="header">
+<div class="title">Fantasi</div>
+<div class="subtitle">Enter a realm of quiet magic and endless wonder.</div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Cari buku atau penulis...">
+</div>
+
+<!-- GRID -->
+<div class="grid" id="bookGrid">
+
+<!-- CARD -->
+<div class="card" data-title="Bumi Tere Liye">
+<div class="badge">IN</div>
+<div class="heart">
+<input type="checkbox" id="h1"><label for="h1">â¤</label>
+</div>
+<img src="Bumi.jpg" class="cover">
+<div class="author">Tere Liye</div>
+<div class="title-book">Bumi</div>
+<div class="price">Rp99.000</div>
+<div class="preview-link" onclick="openPreview('https://example.com')">Preview</div>
+</div>
+
+<div class="card" data-title="Bulan Tere Liye">
+<div class="badge">IN</div>
+<div class="heart">
+<input type="checkbox" id="h2"><label for="h2">â¤</label>
+</div>
+<img src="Bulan.jpg" class="cover">
+<div class="author">Tere Liye</div>
+<div class="title-book">Bulan</div>
+<div class="price">Rp99.000</div>
+<div class="preview-link" onclick="openPreview('https://example.com')">Preview</div>
+</div>
+
+<div class="card" data-title="Matahari Tere Liye">
+<div class="badge">IN</div>
+<div class="heart">
+<input type="checkbox" id="h3"><label for="h3">â¤</label>
+</div>
+<img src="Matahari.jpg" class="cover">
+<div class="author">Tere Liye</div>
+<div class="title-book">Matahari</div>
+<div class="price">Rp99.000</div>
+<div class="preview-link" onclick="openPreview('https://example.com')">Preview</div>
+</div>
+
+<div class="card" data-title="Bintang Tere Liye">
+<div class="badge">IN</div>
+<div class="heart">
+<input type="checkbox" id="h4"><label for="h4">â¤</label>
+</div>
+<img src="Bintang.jpg" class="cover">
+<div class="author">Tere Liye</div>
+<div class="title-book">Bintang</div>
+<div class="price">Rp99.000</div>
+<div class="preview-link" onclick="openPreview('https://example.com')">Preview</div>
+</div>
+
+</div>
+
+<script>
+
+/* SEARCH FILTER */
+document.getElementById("searchInput").addEventListener("keyup", function(){
+let value = this.value.toLowerCase();
+let cards = document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+let text = card.getAttribute("data-title").toLowerCase();
+card.style.display = text.includes(value) ? "block" : "none";
+});
+});
+
+/* OPEN PREVIEW */
+function openPreview(link){
+window.open(link, "_blank");
+}
+
+</script>
+
+  <script src="shared-layout.js" defer></script>
+  <script src="responsive-nav.js"></script>
+</body>
+</html>
+
+
